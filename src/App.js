@@ -1,23 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
-
+import logo from "./logo.svg";
+import "./App.css";
+import { useContext } from "react";
+import { AlertContext } from "./utils/contexts/AlertContext";
 function App() {
+  const ctx = useContext(AlertContext);
+  const useMessage = ctx.Message();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button
+        onClick={() => {
+          useMessage?.success("done!", false);
+        }}
+      >
+        success alert with no auto close
+      </button>
+      <button
+        onClick={() => {
+          useMessage?.success("done!");
+        }}
+      >
+        success alert with default auto close
+      </button>
+      <button
+        onClick={() => {
+          useMessage?.success("done!", true, 2000);
+        }}
+      >
+        success alert with duration on auto close
+      </button>
+      <button
+        onClick={() => {
+          useMessage?.error("done!", false);
+        }}
+      >
+        error alert with no auto close
+      </button>
+      <button
+        onClick={() => {
+          useMessage?.error("done!");
+        }}
+      >
+        error alert with default auto close
+      </button>
+      <button
+        onClick={() => {
+          useMessage?.warning("done!", true, 2000);
+        }}
+      >
+        warninng alert with duration on auto close
+      </button>
     </div>
   );
 }
